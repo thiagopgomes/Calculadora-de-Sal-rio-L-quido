@@ -29,6 +29,8 @@ use App\Service\Desconto;
 use App\Negocio\Falta;
 use App\Negocio\INSS;
 use App\Negocio\CompensacaoValeTransporte;
+use App\Negocio\IRPF;
+
 
 
 // Entradas do programa
@@ -53,6 +55,9 @@ $salario->addDesconto(new Desconto("6% do Salário", $compensacaoValeTransporte-
 
 $falta = new Falta($salarioBase, $quantidadeDeFaltas);
 $salario->addDesconto(new Desconto("faltas", $falta->calcular()));
+
+$irpf = new IRPF($salarioBase);
+$salario->addDesconto(new Desconto("Imposto de Renda", $irpf->calcular()));
 
 
 // Salário Líquido
