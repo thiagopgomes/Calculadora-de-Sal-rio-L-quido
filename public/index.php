@@ -20,7 +20,7 @@
         </div>        
     </main>
     <footer class="rodape">
-        CAL.SAL <?= date('d/m/Y'); ?>        
+        CALC.SAL <?= date('d/m/Y'); ?>        
     </footer> 
 </body>
 

@@ -31,7 +31,7 @@
     </main>
 
     <footer class="rodape">
-        COD3R & ALUNOS © <?= date('Y'); ?>
+        CALC.SAL <?= date('d/m/Y'); ?> 
     </footer>  
 
 </body>
