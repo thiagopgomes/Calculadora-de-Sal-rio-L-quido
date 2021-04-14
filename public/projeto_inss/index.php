@@ -16,6 +16,11 @@
         <input type=value<?= $_POST['faltas'] ?? 10 ?>
         name="faltas" id="faltas">
     </div>
+    <div>
+        <label for="atrasos">Atrasos</label>
+        <input type=value<?= $_POST['atrasos'] ?? 10 ?>
+        name="atrasos" id="atrasos">
+    </div>
     <button>Calcular salário</button>
 </form>
 
@@ -27,6 +32,7 @@ use App\Classes\Salario;
 use App\Service\Beneficio;
 use App\Service\Desconto;
 use App\Negocio\Falta;
+use App\Negocio\Atrasos;
 use App\Negocio\INSS;
 use App\Negocio\CompensacaoValeTransporte;
 use App\Negocio\IRPF;
@@ -37,6 +43,7 @@ use App\Negocio\IRPF;
 $salarioBase = floatval($_POST['salarioBase']);
 $valeTransporte = floatval($_POST['valeTransporte']);
 $quantidadeDeFaltas = intval($_POST['faltas']);
+$atrasos = intval($_POST['atrasos']);
 
 // Calculadora de Salário
 $salario = new Salario($salarioBase);
@@ -55,6 +62,9 @@ $salario->addDesconto(new Desconto("6% do Salário", $compensacaoValeTransporte-
 
 $falta = new Falta($salarioBase, $quantidadeDeFaltas);
 $salario->addDesconto(new Desconto("faltas", $falta->calcular()));
+
+$atraso = new Atrasos($salarioBase, $atrasos);
+$salario->addDesconto(new Desconto("Atrasos", $atraso->calcular()));
 
 $irpf = new IRPF($salarioBase);
 $salario->addDesconto(new Desconto("Imposto de Renda", $irpf->calcular()));
